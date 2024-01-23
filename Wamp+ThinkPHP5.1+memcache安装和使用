@@ -1,0 +1,40 @@
+​1.下载memcache:
+
+官网上并未提供 Memcached 的 Windows 平台安装包，此下载链接源于非官方：http://static.jyshare.com/download/memcached-1.4.5-amd64.zip
+
+2.下载ThinkPHP5.1支持的memcache扩展:
+
+1.根据php版本,NTS以及Zend Extension Build和PHP Extension Build参数下载对应的文件：
+
+https://windows.php.net/downloads/pecl/releases/memcache/4.0.5.2/php_memcache-4.0.5.2-7.3-​​​​​​nts-vc15-x64.zip
+
+将下载后的php_memcache.dll文件移动到php版本对应的ext文件夹中。
+
+在php版本对应的php.ini文件的Dynamic Extensions部分添加：extension=php_memcache;
+
+通过phpinfo命令查看扩展是否正确加载。
+
+3.建议将上述1.和2.两个文件放在名为memcache文件夹中，然后放在wamp环境中的Extension文件夹中。（此点非必须）
+
+4.修改ThinkPHP5.1中cache.php代码：
+
+<?php
+// +----------------------------------------------------------------------
+// | 缓存设置
+// +----------------------------------------------------------------------
+
+return [
+   // 驱动方式
+   'type'   => 'memcache',
+   //host和port来源于E:\phpStudy\phpStudy_64\WWW\tp51.com\thinkphp\library\think\cache\driver\Memcache.php中的options参数中。
+   'host'   => '127.0.0.1',
+   'port'   => 11211,
+   // 缓存保存目录
+   'path'   => '',
+   // 缓存前缀
+   'prefix' => '',
+   // 缓存有效期 0表示永久缓存
+   'expire' => 0,
+];
+
+5.完成，现在可以使用！​
